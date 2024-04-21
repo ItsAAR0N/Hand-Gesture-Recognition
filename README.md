@@ -6,7 +6,6 @@ This is the place where the primary source code will be located and any helpful 
 
 **PRIMARY LIBRARIES USED:** 
 
-*Ploty*: (GREATEST PRIORITY) <br />
 *Numpy*<br />
 *Pandas*<br />
 *matplotlib*<br />
