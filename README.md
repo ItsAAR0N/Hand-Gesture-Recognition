@@ -6,31 +6,31 @@ This is the place where the primary source code will be located and any helpful 
 
 **PRIMARY LIBRARIES USED:** 
 
-*Ploty*: (GREATEST PRIORITY)--
-*Numpy*--
-*Pandas*--
-*matplotlib*--
-*seaborn*--
-*IPython*--
-*sklearn*--
-*tensorflow*--
-*cv2*--
+*Ploty*: (GREATEST PRIORITY) <br />
+*Numpy*<br />
+*Pandas*<br />
+*matplotlib*<br />
+*seaborn*<br />
+*IPython*<br />
+*sklearn*<br />
+*tensorflow*<br />
+*cv2*<br />
 
-*Imported libraries used (dependencies):* 
+*Imported libraries used (dependencies):*<br /> 
 
-import numpy as np--
-import random--
-import pandas as pd--
-import matplotlib.pyplot as plt--
-import seaborn as sns # Visualization Library--
-from IPython.display import display, Image--
-from sklearn.preprocessing import LabelBinarizer--
-from sklearn.model_selection import train_test_split--
-from tensorflow.keras.models import Sequential--
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout--
-from sklearn.metrics import accuracy_score--
-import cv2--
-import time--
+import numpy as np<br />
+import random<br />
+import pandas as pd<br />
+import matplotlib.pyplot as plt<br />
+import seaborn as sns # Visualization Library<br />
+from IPython.display import display, Image<br />
+from sklearn.preprocessing import LabelBinarizer<br />
+from sklearn.model_selection import train_test_split<br />
+from tensorflow.keras.models import Sequential<br />
+from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout<br />
+from sklearn.metrics import accuracy_score<br />
+import cv2<br />
+import time<br />
 
 
 
