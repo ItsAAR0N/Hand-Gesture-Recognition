@@ -1,3 +1,9 @@
+# ELEC4342 Hand Gesture Recognition Project
+# Quantization and Pruning 
+# University of Hong Kong, Author: Cyp 
+# Last Edited: 05/05/24
+
+# Import Libraries
 import os
 import numpy as np
 import tensorflow as tf
@@ -5,9 +11,11 @@ import tempfile
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from tensorflow_model_optimization.quantization.keras import quantize_model
+from tensorflow import keras
+from keras.models import Sequential
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+# from tensorflow import tensorflow_model_optimization
+# from tensorflow_model_optimization.quantization.keras import quantize_model
 import pandas as pd
 
 

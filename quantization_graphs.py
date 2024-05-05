@@ -1,6 +1,13 @@
+# ELEC4342 Hand Gesture Recognition Project
+# Quantization Visualization Graphs
+# University of Hong Kong, Author: Cyp 
+# Last Edited: 05/05/24
+
+# Import Libraries
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow import keras
+from keras.models import Sequential
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow_model_optimization.quantization.keras import quantize_model
 import pandas as pd
 import numpy as np

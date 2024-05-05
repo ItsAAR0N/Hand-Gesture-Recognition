@@ -1,3 +1,8 @@
+# ELEC4342 Hand Gesture Recognition Project
+# Pruning Visualization Graphs
+# University of Hong Kong, Author: Cyp 
+# Last Edited: 05/05/24
+
 # Import Libraries
 import numpy as np
 import random
@@ -7,15 +12,17 @@ import seaborn as sns # Visualization Library
 from IPython.display import display, Image
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout
+from tensorflow import keras
+from keras.models import Sequential
+from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout
 from sklearn.metrics import accuracy_score
 import cv2
 import time
+
 # Define our CNN model
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
-from tensorflow.keras import backend as K 
-from tensorflow.keras.optimizers import Adam # Adam optimizer
+from keras.layers import Conv2D, MaxPooling2D
+from keras import backend as K 
+from keras.optimizers import Adam # Adam optimizer
 
 
 
