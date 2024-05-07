@@ -75,8 +75,12 @@ if __name__ == "__main__":
         class_labels = {0: "rock", 1: "scissor", 2: "paper"}
         result = class_labels[predicted_class_index]
 
-        # Add predicted letter to frame
-        cv2.putText(copy, str(result), (300, 100), cv2.FONT_HERSHEY_COMPLEX, 2, (0, 255, 0), 2)
+        # Get the confidence score of the predicted class
+        confidence_score = prediction[predicted_class_index]
+
+        # Add predicted letter and confidence score to frame
+        cv2.putText(copy, f"Prediction: {result}, Confidence: {confidence_score:.2f}", (10, 100),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow('frame', copy)
 
         # Calculate FPS
