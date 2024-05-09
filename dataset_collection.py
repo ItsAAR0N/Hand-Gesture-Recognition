@@ -39,58 +39,86 @@ num_classes = 3  # Change this to the desired number of classes
 if os.path.exists('./handgestures/train') and os.path.exists('./handgestures/test'):
     print("Dataset already exists, skipping data collection...")
 else:
-    for class_index in range(num_classes):
-        # Initialize counters
-        i = 0
-        image_count = 0
-        while True:
-            print("Press Enter key when ready...")
-            if cv2.waitKey(1) == 13:
-                break
-        # Loop to capture gestures for the current class
-        while i < 3:  # Adjust the condition based on your requirement
-            ret, frame = cap.read()
-            frame = cv2.flip(frame, 1)
+    # Open camera
+    cap = cv2.VideoCapture(0)
 
-            # Define Region of Interest (ROI)
-            roi = frame[100:400, 320:620]
-            cv2.imshow('roi', roi)
-            
-            # Convert ROI to grayscale and resize
-            roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-            roi = cv2.resize(roi, (28, 28), interpolation=cv2.INTER_AREA)
+    # Initialize Counters
+    i = 0
+    image_count = 0
 
-            cv2.imshow('roi scaled and gray', roi)
-            copy = frame.copy()
-            cv2.rectangle(copy, (320, 100), (620, 400), (255, 0, 0), 5)
+    while i < 9: 
+        ret, frame = cap.read()
+        frame = cv2.flip(frame, 1)
 
-            # Define directory based on class index
-            gesture_dir = f'./handgestures/train/{class_index}/' if i % 2 == 1 else f'./handgestures/test/{class_index}/'
-            makedir(gesture_dir)
+        # Define ROI (Region of Interest)
+        roi = frame[100:400, 320:620]
+        cv2.imshow('roi', roi)
 
-            # Increment image count for the current class
+        # Convert RoI to grayscale and resize
+        # roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+        roi = cv2.resize(roi, (96,96), interpolation=cv2.INTER_AREA) # Baseline CNN (28x28x1), MobileNETV2 (96x96x3)
+
+        cv2.imshow('roi scaled and gray', roi)
+        copy = frame.copy()
+        cv2.rectangle(copy, (320, 100), (620, 400), (255,0,0), 5)
+
+        if i == 0:
+            image_count = 0
+            cv2.putText(copy, "Hit enter to record when ready", (100,100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+        elif i == 1:
             image_count += 1
-
-            # Save the image with appropriate label
+            cv2.putText(copy, "Recording 1st gesture - Train", (100, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            cv2.putText(copy, str(image_count), (400, 400), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            gesture_dir = './handgestures/train/0/'
+            makedir(gesture_dir)
             cv2.imwrite(gesture_dir + str(image_count) + ".jpg", roi)
+        elif i == 2:
+            image_count += 1
+            cv2.putText(copy, "Recording 1st gesture - Test", (100, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            cv2.putText(copy, str(image_count), (400, 400), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            gesture_dir = './handgestures/test/0/'
+            makedir(gesture_dir)
+            cv2.imwrite(gesture_dir + str(image_count) + ".jpg", roi)
+        elif i == 3:
+            cv2.putText(copy, "Hit enter to record when ready to record 2nd gesture", (100,100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+        elif i == 4:
+            image_count += 1
+            cv2.putText(copy, "Recording 2nd gesture - Train", (100, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            cv2.putText(copy, str(image_count), (400, 400), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            gesture_dir = './handgestures/train/1/'
+            makedir(gesture_dir)
+            cv2.imwrite(gesture_dir + str(image_count) + ".jpg", roi)
+        elif i == 5:
+            image_count += 1
+            cv2.putText(copy, "Recording 2nd gesture - Test", (100, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            cv2.putText(copy, str(image_count), (400, 400), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            gesture_dir = './handgestures/test/1/'
+            makedir(gesture_dir)
+            cv2.imwrite(gesture_dir + str(image_count) + ".jpg", roi)
+        elif i == 6:
+            cv2.putText(copy, "Hit enter to record when ready to record 3rd gesture", (100,100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+        elif i == 7:
+            image_count += 1
+            cv2.putText(copy, "Recording 3rd gesture - Train", (100, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            cv2.putText(copy, str(image_count), (400, 400), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            gesture_dir = './handgestures/train/2/'
+            makedir(gesture_dir)
+            cv2.imwrite(gesture_dir + str(image_count) + ".jpg", roi)
+        elif i == 8:
+            image_count += 1
+            cv2.putText(copy, "Recording 3rd gesture - Test", (100, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            cv2.putText(copy, str(image_count), (400, 400), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+            gesture_dir = './handgestures/test/2/'
+            makedir(gesture_dir)
+            cv2.imwrite(gesture_dir + str(image_count) + ".jpg", roi)
+        elif i == 9:
+            cv2.putText(copy, "Hit Enter to Exit", (100,100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
 
-            # Display appropriate message based on the stage of recording
-            if i == 0:
-                cv2.putText(copy, "Hit enter to record when ready", (100, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
-            elif i == 6:
-                cv2.putText(copy, "Hit Enter to Exit", (100, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
-            else:
-                recording_stage = "Train" if i % 2 == 1 else "Test"
-                cv2.putText(copy, f"Recording {class_index} gesture - {recording_stage}", (100, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
-                cv2.putText(copy, str(image_count), (400, 400), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+        cv2.imshow('frame', copy)
 
-            cv2.imshow('frame', copy)
-
-            # Wait for enter key (13 is the ASCII code for enter)
-            if cv2.waitKey(1) == 13:
-                image_count = 0
-                i += 1
-
+        if cv2.waitKey(1) == 13: # 13 is enter key
+            image_count = 0
+            i += 1
 
 # Release camera and close windows
 cap.release()

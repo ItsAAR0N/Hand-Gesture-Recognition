@@ -14,6 +14,7 @@ from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 from tensorflow import keras
 from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras.models import Model
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout, BatchNormalization, Flatten, Activation
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -31,9 +32,9 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description='Hand Gesture Recognition using Baseline CNN'
     )
-    parser.add_argument('--train_path', default='./handgestures/train', 
+    parser.add_argument('--train_path', default='./handgestures_mnv2/train', 
                         type=str, required=False, help = 'Path to training dataset folder'),
-    parser.add_argument('--test_path', default= './handgestures/test', 
+    parser.add_argument('--test_path', default= './handgestures_mnv2/test', 
                         type=str, required=False, help = 'Path to testing dataset folder')                            
     return parser.parse_args()
 
@@ -72,7 +73,7 @@ if __name__ == "__main__":
         train_data_dir, 
         target_size=(img_rows, img_cols),  # Resize images to match model input size
         batch_size=batch_size, 
-        color_mode='grayscale',  # Convert images to grayscale
+        color_mode='rgb',  # Convert images to grayscale
         class_mode='categorical' # Categorical labels 
     )
 
@@ -81,7 +82,7 @@ if __name__ == "__main__":
         validation_data_dir, 
         target_size=(img_rows, img_cols), 
         batch_size=batch_size, 
-        color_mode='grayscale', 
+        color_mode='rgb', 
         class_mode='categorical'
     )
 
