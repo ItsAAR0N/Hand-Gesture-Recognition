@@ -12,11 +12,10 @@ def parse_arguments() -> argparse.Namespace:
     Add arguments.
     '''
     parser = argparse.ArgumentParser(
-        description='Hand Gesture Recognition using Baseline CNN'
+        description='Hand Gesture Recognition using Baseline CNN or MobileNetV2'
     )
-    parser.add_argument('--model_location', default='saved_models/my_gestures_cnn_20_epochs.h5', 
-                        type=str, required=False, help = 'Path to model'),
-                       
+    parser.add_argument('--model_location', default='saved_models/my_gestures_mobilenet_10_epochs.h5', # Adjust as necessary
+                        type=str, required=False, help = 'Path to model'),     
     return parser.parse_args()
 
 if __name__ == "__main__":

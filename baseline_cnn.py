@@ -30,9 +30,9 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description='Hand Gesture Recognition using Baseline CNN'
     )
-    parser.add_argument('--train_path', default='./handgestures/train', 
+    parser.add_argument('--train_path', default='./handgestures_baseline_cnn/train', 
                         type=str, required=False, help = 'Path to training dataset folder'),
-    parser.add_argument('--test_path', default= './handgestures/test', 
+    parser.add_argument('--test_path', default= './handgestures_baseline_cnn/test', 
                         type=str, required=False, help = 'Path to testing dataset folder')                            
     return parser.parse_args()
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     num_classes = 3
 
     # Image dimensions
-    img_rows, img_cols = 28, 28
+    img_rows, img_cols = 28, 28 # Baseline CNN only needs 28x28
 
     # Batch size for training
     batch_size = 16 # Adjust hyper-parameter

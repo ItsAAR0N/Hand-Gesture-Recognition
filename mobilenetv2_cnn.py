@@ -30,7 +30,7 @@ def parse_arguments() -> argparse.Namespace:
     Add arguments.
     '''
     parser = argparse.ArgumentParser(
-        description='Hand Gesture Recognition using Baseline CNN'
+        description='Hand Gesture Recognition using pre-trained MobileNetV2'
     )
     parser.add_argument('--train_path', default='./handgestures_mnv2/train', 
                         type=str, required=False, help = 'Path to training dataset folder'),
