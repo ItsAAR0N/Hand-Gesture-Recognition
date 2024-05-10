@@ -14,7 +14,7 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description='Hand Gesture Recognition using Baseline CNN, LeNet-5 or MobileNetV2'
     )
-    parser.add_argument('--model_location', default='saved_models/my_gestures_mobilenet_10_epochs.h5', # Adjust as necessary
+    parser.add_argument('--model_location', default='saved_models/my_gestures_mobilenet_25_epochs.h5', # Adjust as necessary
                         type=str, required=False, help = 'Path to model'),     
     return parser.parse_args()
 
@@ -29,5 +29,5 @@ if __name__ == "__main__":
     tflite_model = converter.convert()
 
     # Save the TFLite model to a file
-    with open('saved_models/my_gestures_cnn_20_epochs_tflite.tflite', 'wb') as f:
+    with open('saved_models/my_gestures_mnv2_25_epochs_tflite.tflite', 'wb') as f:
         f.write(tflite_model)

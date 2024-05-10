@@ -1,7 +1,7 @@
 # ELEC4342 Hand Gesture Recognition Project
 # Quantization and Pruning 
-# University of Hong Kong, Author: Cyp 
-# Last Edited: 05/05/24
+# University of Hong Kong, Author: Cyp, Aaron
+# Last Edited: 11/05/24
 
 # Import Libraries
 import os
@@ -20,10 +20,11 @@ import pandas as pd
 
 
 # Set the path where the model is saved
-path = "saved_models/sign_mnist_cnn_10_epochs.h5"  # 
+path = "/content/my_gestures_mobilenet_25_epochs.h5"  # Change as required.
+
 model = tf.keras.models.load_model(path)
 
-threshold = 0.05  # Define the threshold for zeroing weights
+# threshold = 0.05  # Define the threshold for zeroing weights
 
 # Iterate over each layer in the model
 for layer in model.layers:
@@ -31,7 +32,8 @@ for layer in model.layers:
     new_weights = []
     for w in weights:
         # Apply thresholding to zero out small weights
-        modified_w = np.where(np.abs(w) < threshold, 0, w)
+        # modified_w = np.where(np.abs(w) < threshold, 0, w)
+        modified_w = w
         new_weights.append(modified_w)
     layer.set_weights(new_weights)  # Set the modified weights back to the layer
 
@@ -51,8 +53,8 @@ def quantize_and_save_model(model, optimizations, supported_types, file_path):
     return model_size
 
 # Example usage
-file_path = 'compressed/test.tflite'
+file_path = '/content/compressed/mnv2_compressed.tflite'
 model_size = quantize_and_save_model(model, [tf.lite.Optimize.DEFAULT], [tf.float16], file_path)
-print("Model size:", model_size, "KB")
+print("Successfully converted to TFLITE. Model size:", model_size, "KB")
 
 
