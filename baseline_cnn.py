@@ -16,7 +16,7 @@ from tensorflow import keras
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout, BatchNormalization, Flatten, Activation
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from keras.optimizers import AdamW
+from keras.optimizers import Adam, AdamW
 from sklearn.metrics import accuracy_score
 import argparse
 import cv2
@@ -36,8 +36,30 @@ def parse_arguments() -> argparse.Namespace:
                         type=str, required=False, help = 'Path to testing dataset folder')                            
     return parser.parse_args()
 
+def plot_training(history):
+    # Plot training & validation accuracy values
+    plt.plot(history.history['accuracy'])
+    plt.plot(history.history['val_accuracy'])
+    plt.title('MODEL ACCURACY\n({})'.format(model_info))
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Validation'], loc='upper left')
+    plt.grid(True)
+    plt.show()
+
+    # Plot training & validation loss values
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('MODEL LOSS\n({})'.format(model_info))
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Validation'], loc='upper left')
+    plt.grid(True)
+    plt.show()
+
 if __name__ == "__main__":
     args = parse_arguments()
+    start_time = time.time()  # Record start time
 
     # Number of classes 
     num_classes = 3
@@ -111,11 +133,13 @@ if __name__ == "__main__":
 
     print(model.summary()) # ~ 83,203 parameters
 
+    learning_rate = 0.001
+
     ######### Training #########
     # Use a very small learning rate
     # Compile the model with binary cross-entropy loss, RMSprop optimizer, and accuracy metrics
     model.compile(loss='categorical_crossentropy',
-                optimizer=AdamW(learning_rate=0.00075, weight_decay = 0.005), # Adjustable hyperparameter
+                optimizer=Adam(learning_rate=learning_rate), # Adjustable hyperparameter
                 metrics=['accuracy'])
 
     # Number of training and validation samples
@@ -133,6 +157,15 @@ if __name__ == "__main__":
         validation_data=validation_generator,
         validation_steps=nb_validation_samples // batch_size  # Number of validation batches per epoch
     )
+
+    # Calculate training time
+    training_time = time.time() - start_time
+    print("Training time: {:.2f} seconds".format(training_time))
+
+    model_info = "MobileNetV2, Loss: C-CE, Adam Optimizer, LR: {}".format(learning_rate)
+
+    # Plot training curves
+    plot_training(history)
 
     # Save our Model
     model.save('saved_models/my_gestures_cnn_{0}_epochs.h5'.format(str(epochs)))

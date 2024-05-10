@@ -35,10 +35,10 @@ def parse_arguments() -> argparse.Namespace:
     Add arguments.
     '''
     parser = argparse.ArgumentParser(
-        description='Hand Gesture Recognition using Baseline CNN'
+        description='Hand Gesture Recognition data collection'
     )
     parser.add_argument('--model', default='mobilenetv2', # Adjust file name as necessary
-                        type=str, required=False, help = 'Select model: baseline_cnn - mobilenetv2 - '),                      
+                        type=str, required=False, help = 'Select model: "baseline_cnn" - "lenet-5" - "mobilenetv2" - '),                      
     return parser.parse_args()
 
 if __name__ == '__main__':
@@ -46,9 +46,12 @@ if __name__ == '__main__':
     if args.model == 'mobilenetv2':
         file_loc_name = 'handgestures_mnv2'
         image_size = (96,96)
-    else:
+    elif args.model == 'baseline_cnn':
         image_size = (28,28)
         file_loc_name = 'handgestures_baseline_cnn'
+    else:
+        image_size = (32, 32) # LeNet-5 
+        file_loc_name = 'handgestures_lenet5_cnn'
 
     # Open camera
     cap = cv2.VideoCapture(0)
@@ -76,7 +79,7 @@ if __name__ == '__main__':
             cv2.imshow('roi', roi)
 
             # Convert RoI to grayscale and resize
-            if args.model == 'baseline_cnn':
+            if args.model == 'baseline_cnn' or args.model == 'lenet-5':
                 roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
             else:
                 roi = roi

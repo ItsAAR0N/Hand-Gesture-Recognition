@@ -17,10 +17,10 @@ def parse_arguments() -> argparse.Namespace:
     Add arguments.
     '''
     parser = argparse.ArgumentParser(
-        description='Hand Gesture Recognition using Baseline CNN or MobileNetV2'
+        description='Hand Gesture Recognition using Baseline CNN, LeNet-5, or MobileNetV2'
     )
     parser.add_argument('--model', default='mobilenetv2', # Adjust file name as necessary
-                        type=str, required=False, help = 'Select model: baseline_cnn - mobilenetv2 - '),
+                        type=str, required=False, help = 'Select model: "baseline_cnn" - "lenet-5" - "mobilenetv2" - '),
     parser.add_argument('--model_location', default='saved_models/my_gestures_mobilenet_10_epochs.h5', # Adjust file name as necessary
                         type=str, required=False, help = 'Path to model'),
                        
@@ -33,9 +33,12 @@ if __name__ == "__main__":
     if (args.model) == 'mobilenetv2':
         image_size = (96,96)
         input_shape = (96, 96, 3) # RGB 
-    else:
+    elif args.model == 'baseline_cnn':
         image_size = (28,28)
         input_shape = (28, 28, 1) # Grayscale
+    else: 
+        image_size = (32, 32)
+        input_shape = (32, 32, 1) # Gray scale
 
     cap = cv2.VideoCapture(0)
 

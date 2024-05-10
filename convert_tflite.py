@@ -12,7 +12,7 @@ def parse_arguments() -> argparse.Namespace:
     Add arguments.
     '''
     parser = argparse.ArgumentParser(
-        description='Hand Gesture Recognition using Baseline CNN or MobileNetV2'
+        description='Hand Gesture Recognition using Baseline CNN, LeNet-5 or MobileNetV2'
     )
     parser.add_argument('--model_location', default='saved_models/my_gestures_mobilenet_10_epochs.h5', # Adjust as necessary
                         type=str, required=False, help = 'Path to model'),     
