@@ -1,5 +1,6 @@
 # ELEC4342 Embedded Machine Learning Final Project 
 (PLEASE REFER TO THE VIDEO.MP4 FOR LIVE DEMO!!!!!)<br />
+<br />
 Sign Language Hand/Gesture Recognition on Raspberry Pi 
 
 This is the place where the primary source code will be located and any helpful and relevant documents, useful links etc., will all be stored here at an appropriate time. 
